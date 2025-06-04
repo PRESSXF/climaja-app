@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Histórico de Buscas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let cidade of historicoPaginado">
+      <ion-label>{{ cidade }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+<ion-button (click)="onPageChange(paginaAtual - 1)" [disabled]="paginaAtual === 1">Anterior</ion-button>
+<span>Página {{paginaAtual}} de {{totalPaginas}}</span>
+<ion-button (click)="onPageChange(paginaAtual + 1)" [disabled]="paginaAtual === totalPaginas">Próxima</ion-button>
+</ion-content>

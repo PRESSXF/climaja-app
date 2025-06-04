@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>ClimaJá - Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Digite o nome da cidade</ion-label>
+    <ion-input [(ngModel)]="cidade" (keyup.enter)="buscarClima()"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="buscarClima()">Buscar Clima</ion-button>
+
+  <ion-spinner *ngIf="carregando" name="crescent"></ion-spinner>
+
+  <div *ngIf="climaAtual">
+    <h2>{{ climaAtual.name }}</h2>
+    <p>Temperatura: {{ climaAtual.main.temp | temperatura }}</p>
+    <p>Condição: {{ climaAtual.weather[0].description }}</p>
+    <ion-button expand="block" (click)="irParaDetalhes()">Ver Detalhes</ion-button>
+  </div>
+
+  <ion-button expand="block" (click)="irParaHistorico()">Ver Histórico de Buscas</ion-button>
+
+  <ion-list *ngIf="historicoService.getHistorico().length > 0">
+    <ion-list-header>Histórico de Cidades</ion-list-header>
+    <ion-item *ngFor="let cidade of historicoService.getHistorico()" (click)="selecionarCidade(cidade)">
+      {{ cidade }}
+    </ion-item>
+  </ion-list>
+</ion-content>
